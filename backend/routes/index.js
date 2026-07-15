@@ -1,22 +1,18 @@
-// Importing express.
+// Importing the express module
 const express = require('express');
-
-// Main router that will combine all our smaller routers together.
 const router = express.Router();
 
-// A simple function that just sends back a welcome message.
+// Function for the hello route
 function getData(req, res) {
-    res.send({
-        message: "Hello from Unishka!"
-    });
+  res.send({
+    message: "Hello from Unishka!"
+  });
 }
 
-// When someone visits the root path '/', send the hello message.
+// Sending a hello message on the root '/' route
 router.get('/', getData);
 
-// Any request starting with '/documents' gets forwarded to documentRoutes.js.
-// Example: '/documents' here + '/' inside documentRoutes.js = full route.
+// Mounting documentRoutes on the '/documents' path
 router.use('/documents', require('./documentRoutes'));
 
-// Exporting this combined router so app.js can use it.
 module.exports = router;
