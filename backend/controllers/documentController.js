@@ -1,39 +1,64 @@
-// Importing our two helper functions from db.js.
-// We don't deal with fs/path directly here — db.js already handles that.
-const { readData, writeData } = require('../models/db');
+const documentModel = require('../models/documentModel');
 
-// This function runs when someone sends a GET request to see all documents.
-function getDocuments(req, res) {
-    // Get the latest data from the file.
-    const data = readData();
-
-    // Send only the 'documents' array back to whoever made the request.
-    res.send(data.documents);
+function list(req, res) {
+    try {
+        const documents = documentModel.findAll();
+        res.send({
+            success: true,
+            message: "Retrieve the list of documents.",
+            documents: documents,
+        });
+    } catch (error) {
+        console.log("error in list", error);
+        res.status(500).send({
+            success: false,
+            message: "Failed to retrieve the list of documents.",
+        });
+    }
 }
 
-// This function runs when someone sends a POST request to add a new document.
-function createDocument(req, res) {
-    // First, read the current data so we don't overwrite existing documents.
-    const data = readData();
-
-    // Build a new document object using data sent by the client (req.body)
-    // plus an auto-generated id based on how many documents already exist.
-    const newDocument = {
-        id: data.documents.length + 1,
-        title: req.body.title,
-        content: req.body.content
-    };
-
-    // Add the new document to the existing documents array (in memory).
-    data.documents.push(newDocument);
-
-    // Save the whole updated data object back into the file.
-    writeData(data);
-
-    // Send back the newly created document as confirmation.
-    // Status 201 means "Created successfully".
-    res.status(201).send(newDocument);
+function create(req, res) {
+    res.send({
+        message: "Hello from Gaurav!"
+    });
 }
 
-// Exporting both functions so the routes file can use them.
-module.exports = { getDocuments, createDocument };
+function findOne(req, res) {
+    try {
+        const id = req.params.id;
+        const document = documentModel.findById(id);
+
+        if (!document) {
+            return res.status(404).send({
+                success: false,
+                message: "Document not found.",
+            });
+        }
+
+        res.send({
+            success: true,
+            message: "Retrieved the document.",
+            document
+        });
+    } catch (error) {
+        console.log("error in retrieve", error);
+        res.status(500).send({
+            success: false,
+            message: "Failed to retrieve the document.",
+        });
+    }
+}
+
+module.exports = {
+    list,
+    create,
+    findOne
+};
+
+// ---------------------------------------------------------------------------
+// File: controllers/documentController.js
+// A controller connects requests to data. It reads what the client
+// sent (req), asks the model for data, and sends back a response
+// (res). It does not touch data.json or fs directly — that job
+// belongs to the model and db layers.
+// ---------------------------------------------------------------------------

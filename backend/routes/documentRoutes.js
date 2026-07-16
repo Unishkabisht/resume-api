@@ -1,19 +1,22 @@
-// Import the express library .
 const express = require('express');
-
-// Creating a "router" — a mini version of an express app,
-// used to group related routes together (all /documents routes here).
 const router = express.Router();
+const documentController = require('../controllers/documentController');
 
-// Importing our two controller functions.
-// These contain the actual logic; this file just connects them to routes.
-const { getDocuments, createDocument } = require('../controllers/documentController');
+const validate = require('../middlewares/documentValidator');
 
-// When a GET request comes to '/', run getDocuments (return all documents).
-router.get('/', getDocuments);
+router.get('/', documentController.list);
 
-// When a POST request comes to '/', run createDocument (add a new document).
-router.post('/', createDocument);
+router.get('/:id', validate, documentController.findOne);
 
-// Exporting the router so index.js can use it.
+router.post('/', documentController.create);
+
 module.exports = router;
+
+/*
+ File: routes/documentRoutes.js
+ Maps HTTP methods and URLs (like GET '/:id') to their matching
+ controller functions, and attaches middleware (like validate) that
+ should run before a controller. This file has no logic of its own —
+ it only wires requests to the right function.
+*/
+
