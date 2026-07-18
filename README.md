@@ -1,12 +1,26 @@
-# Resume Forge API
+# Resume API
+
+This repository documents my journey learning backend development with **Node.js** and **Express** — from a first plain-routes prototype, to a simple layered CRUD API, to a full-featured, production-style resume/CV builder backend.
+
+It contains three folders, in order of progress:
+
+| Folder | Status | Description |
+|---|---|---|
+| **[`resume-forge-api/`](./resume-forge-api)** | ✅ **Latest / Main Project** | Full-featured resume builder REST API — the one to look at |
+| `backend/` | 📚 Learning version | Simple documents-only CRUD API, layered architecture practice |
+| `backup older/` | 📚 Earliest version | First attempt with plain Express routes, no layered structure |
+
+---
+
+## 🚀 `resume-forge-api/` — The Main Project
+
+This is the current, complete version of the project and the one that matters. Everything below applies to it.
 
 Resume Forge is a REST API for a resume/CV builder platform, built with **Node.js** and **Express** using a clean, layered architecture (`routes → controllers → models`). It ships with a lightweight file-based JSON database, so there is no external database setup required to run or test the project.
 
 📄 **Full API Documentation (Postman):** https://documenter.getpostman.com/view/56589047/2sBY4PNfGk
 
----
-
-## Table of Contents
+### Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -19,19 +33,14 @@ Resume Forge is a REST API for a resume/CV builder platform, built with **Node.j
 - [Resetting / Seeding Data](#resetting--seeding-data)
 - [Testing with Postman](#testing-with-postman)
 - [Project Structure](#project-structure)
-- [Author](#author)
 
----
-
-## Overview
+### Overview
 
 Resume Forge lets a user register an account, build multiple resumes and cover letters, organize their content into structured sections (Experience, Education, Skills, Projects, etc.), save version history of a document, restore a previous version, get lightweight AI-assisted writing suggestions, and keep track of job applications tied to a specific resume — all through a clean, predictable REST API.
 
 The project was built as part of a structured backend development course, with a strong focus on REST API design principles, separation of concerns, and consistent response conventions.
 
----
-
-## Features
+### Features
 
 - **User Authentication** — Register, login, logout, and password recovery flow (forgot/reset password) using mock bearer tokens.
 - **User Profile** — View, update, and delete your own account.
@@ -43,9 +52,7 @@ The project was built as part of a structured backend development course, with a
 - **Job Application Tracking** — Log job applications linked to a specific resume and track their status (applied, interviewing, offered, rejected).
 - **Consistent Response Shape** — Every endpoint returns a predictable `{ success, message, data }` structure.
 
----
-
-## Tech Stack
+### Tech Stack
 
 | Layer          | Technology                          |
 |----------------|--------------------------------------|
@@ -55,9 +62,7 @@ The project was built as part of a structured backend development course, with a
 | Auth           | Custom mock Bearer token sessions    |
 | API Testing    | Postman                              |
 
----
-
-## Project Architecture
+### Project Architecture
 
 Resume Forge follows a simple **layered (MVC-style) architecture**:
 
@@ -79,19 +84,17 @@ Client (Postman / Frontend)
 
 Each layer has a single responsibility, which keeps the codebase easy to navigate, test, and extend — for example, the JSON file storage could be swapped for a real database later by only changing the `models/` layer.
 
----
+### Getting Started
 
-## Getting Started
-
-### Prerequisites
+**Prerequisites**
 - [Node.js](https://nodejs.org/) (v16 or later recommended)
 - [Postman](https://www.postman.com/) (for testing the API)
 
-### Installation
+**Installation**
 
 ```bash
-# 1. Clone or download the project, then move into it
-cd resume-forge
+# 1. Move into the main project folder
+cd resume-forge-api
 
 # 2. Install dependencies
 npm install
@@ -108,9 +111,7 @@ http://localhost:3000
 
 All routes are prefixed with `/api`.
 
----
-
-## Authentication
+### Authentication
 
 Resume Forge uses simple **mock Bearer tokens** (not real JWTs) to keep local testing straightforward.
 
@@ -125,15 +126,13 @@ Authorization: Bearer <token>
 Public routes (no token required): `/api/auth/*` and `/api/templates/*`.
 All other routes require a valid token.
 
----
-
-## API Reference
+### API Reference
 
 The full request/response reference — including sample payloads, required fields, and error responses for every endpoint — is documented in Postman:
 
 👉 **https://documenter.getpostman.com/view/56589047/2sBY4PNfGk**
 
-### Quick Overview
+**Quick Overview**
 
 | Resource         | Base Route                              | Description                                              | Auth Required |
 |-------------------|------------------------------------------|------------------------------------------------------------|:--------------:|
@@ -146,9 +145,7 @@ The full request/response reference — including sample payloads, required fiel
 | **AI**            | `/api/ai`                                | AI-assisted writing helpers (consumes AI credits)             | ✅ |
 | **Applications**  | `/api/applications`                      | Track job applications linked to a resume                     | ✅ |
 
----
-
-## Response Format
+### Response Format
 
 Every API response follows the same consistent shape:
 
@@ -166,9 +163,7 @@ Every API response follows the same consistent shape:
 
 Error responses follow the same shape with `success: false` and an appropriate HTTP status code (`400`, `401`, `403`, `404`, or `500`).
 
----
-
-## Resetting / Seeding Data
+### Resetting / Seeding Data
 
 `data.json` acts as the database and is updated automatically as you use the API.
 
@@ -194,9 +189,7 @@ Error responses follow the same shape with `success: false` and an appropriate H
 npm run seed
 ```
 
----
-
-## Testing with Postman
+### Testing with Postman
 
 1. Start the server: `npm start`
 2. Open the published collection docs: **https://documenter.getpostman.com/view/56589047/2sBY4PNfGk**
@@ -205,12 +198,10 @@ npm run seed
 5. Add the token to the `Authorization` header on any protected request as `Bearer <token>`.
 6. All changes persist to `data.json` — open the file directly at any time to verify the data was saved correctly.
 
----
-
-## Project Structure
+### Project Structure
 
 ```
-resume-forge/
+resume-forge-api/
 ├── app.js                     # Entry point — starts the Express server
 ├── routes/
 │   └── index.js                # All routes for every resource, mounted under /api
@@ -242,27 +233,69 @@ resume-forge/
 
 ---
 
-## Legacy / Learning Version
+## 📚 `backend/` — Learning Version (Layered CRUD Practice)
 
-This repository also includes a `backup/` folder containing an earlier, simpler version of this project (documents-only CRUD API, no auth, sections, versions, templates, AI, or applications). It was built earlier while first learning the routes → controllers → models pattern and is kept here purely for reference — it is **not** used by or connected to the current API in any way.
+This folder holds an earlier, simpler version of the API built while first practicing the **routes → controllers → models** layered pattern. It only covers document CRUD (no auth, sections, versions, templates, AI, or applications) and is kept purely for reference — it is **not** connected to or used by `resume-forge-api`.
 
 ```
-resume-forge/
-├── backup/                     # Older, simpler version — kept for learning reference only
-│   ├── app.js
-│   ├── routes/
-│   ├── controllers/
-│   ├── middlewares/
-│   ├── models/
-│   └── data.json
-├── app.js                      # Current version (see Project Structure above)
-├── ...
+backend/
+├── app.js
+├── data.json
+├── controllers/
+│   └── documentController.js
+├── middlewares/
+│   └── documentValidator.js
+├── models/
+│   ├── db.js
+│   ├── documentModel.js
+│   └── documentRepository.js   # reference-only, not wired into the app
+├── routes/
+│   ├── documentRoutes.js
+│   └── index.js
+├── package.json
+└── package-lock.json
 ```
 
-If you're only interested in the current, full-featured API, you can safely ignore the `backup/` folder entirely.
+To run it standalone:
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+---
+
+## 📚 `backup older/` — Earliest Version (Plain Express Routes)
+
+This is the very first version of the project, written before adopting a layered architecture. All logic (route handling + data access) lives directly inside the route files themselves, with no separate `controllers/` or `models/` folders. It's kept here as a record of how the project started.
+
+```
+backup older/
+├── index.js
+├── data.json
+├── README.md
+├── routes/
+│   ├── ai.js
+│   ├── applications.js
+│   ├── auth.js
+│   ├── documents.js
+│   ├── templates.js
+│   └── users.js
+├── package.json
+└── package-lock.json
+```
+
+To run it standalone:
+
+```bash
+cd "backup older"
+npm install
+npm start
+```
 
 ---
 
 ## Author
 
-Built by **Unishka Bisht** as part of a structured backend development course, focused on REST API design and layered Express architecture.
+Built by **Unishka Bisht** as part of a structured backend development course, showing progress from a plain-routes prototype to a fully layered, feature-complete REST API.
