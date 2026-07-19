@@ -7,7 +7,6 @@ function validate(req, res, next) {
             message: "Id not provided.",
         });
     }
-
     next();
 }
 

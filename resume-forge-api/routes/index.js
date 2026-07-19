@@ -62,10 +62,10 @@ router.post("/documents/:id/versions", authValidator, documentValidator, version
 router.post("/documents/:id/versions/:versionId/restore", authValidator, documentValidator, versionController.restoreVersion);
 
 // ================= TEMPLATES =================
-// /api/templates
+// /api/templates - public, read-only. There is no create endpoint
+// because templates are curated resources, not user-generated content.
 router.get("/templates", templateController.listTemplates);
 router.get("/templates/:id", templateController.getTemplate);
-router.post("/templates", templateController.createTemplate);
 
 // ================= AI =================
 // /api/ai - dummy AI-assisted resume writing helpers (consumes credits)

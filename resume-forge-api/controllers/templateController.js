@@ -3,6 +3,8 @@
 
 const templateModel = require("../models/templateModel");
 
+// GET /api/templates
+// Returns every available resume template. Public route — no auth required.
 async function listTemplates(req, res) {
   try {
     const templates = templateModel.findAll();
@@ -17,6 +19,9 @@ async function listTemplates(req, res) {
   }
 }
 
+// GET /api/templates/:id
+// Returns a single template by id, or a 404 if it doesn't exist.
+// Public route — no auth required.
 async function getTemplate(req, res) {
   try {
     const template = templateModel.findById(req.params.id);
@@ -38,32 +43,4 @@ async function getTemplate(req, res) {
   }
 }
 
-async function createTemplate(req, res) {
-  try {
-    const { name, description, config } = req.body;
-
-    if (!name) {
-      return res.status(400).json({
-        success: false,
-        message: "Template name is required",
-      });
-    }
-
-    const template = templateModel.createTemplate({
-      name,
-      description: description || "",
-      config: config || {},
-    });
-
-    return res.status(201).json({
-      success: true,
-      message: "Template created successfully",
-      data: template,
-    });
-  } catch (error) {
-    console.log("error in createTemplate", error);
-    return res.status(500).json({ success: false, message: "Internal Server Error" });
-  }
-}
-
-module.exports = { listTemplates, getTemplate, createTemplate };
+module.exports = { listTemplates, getTemplate };

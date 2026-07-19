@@ -1,28 +1,22 @@
 // models/templateModel.js
 // Read access to the resume templates a user can pick from when
-// creating a document.
+// creating a document. Templates are curated data (seeded/managed
+// directly in data.json), so only find operations are exposed here —
+// there is no create/update/delete because the API has no endpoint for it.
+const { readDB } = require("./db");
 
-const { readDB, writeDB, getNextId } = require("./db");
-
+// Returns the full list of templates.
+// Used by: GET /api/templates
 function findAll() {
   const db = readDB();
   return db.templates;
 }
 
+// Returns a single template matching the given id, or null if not found.
+// Used by: GET /api/templates/:id
 function findById(id) {
   const db = readDB();
   return db.templates.find((t) => t.id === Number(id)) || null;
 }
 
-function createTemplate(template) {
-  const db = readDB();
-  const record = {
-    id: getNextId(db.templates),
-    ...template,
-  };
-  db.templates.push(record);
-  writeDB(db);
-  return record;
-}
-
-module.exports = { findAll, findById, createTemplate };
+module.exports = { findAll, findById };
