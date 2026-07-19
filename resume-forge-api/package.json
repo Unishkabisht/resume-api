@@ -1,0 +1,16 @@
+{
+  "name": "resume-api",
+  "version": "1.0.0",
+  "description": "Resume Builder REST API with a layered (routes -> controllers -> models) architecture",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "seed": "node seed/fakeData.js"
+  },
+  "keywords": ["resume", "api", "express"],
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

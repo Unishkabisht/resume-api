@@ -1,0 +1,208 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Unishka Bisht",
+      "email": "unishka@gmail.com",
+      "password": "password123",
+      "tier": "free",
+      "aiCredits": 6,
+      "createdAt": "2026-07-18T13:17:59.957Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": 1,
+      "userId": 1,
+      "token": "mock-token-1784380703107",
+      "createdAt": "2026-07-18T13:18:23.107Z"
+    }
+  ],
+  "passwordResets": [],
+  "documents": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Frontend Developer Resume - Updated",
+      "type": "resume",
+      "templateId": 1,
+      "createdAt": "2026-07-18T13:23:37.166Z",
+      "updatedAt": "2026-07-18T13:54:11.108Z"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "Cover Letter",
+      "type": "resume",
+      "templateId": null,
+      "createdAt": "2026-07-18T13:26:31.105Z",
+      "updatedAt": "2026-07-18T13:26:31.105Z"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "title": "Updated Resume (copy)",
+      "type": "resume",
+      "templateId": 1,
+      "createdAt": "2026-07-18T13:27:30.367Z",
+      "updatedAt": "2026-07-18T13:27:30.367Z"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "Frontend Developer Resume - Updated (copy)",
+      "type": "resume",
+      "templateId": 1,
+      "createdAt": "2026-07-18T13:30:14.390Z",
+      "updatedAt": "2026-07-18T13:30:14.390Z"
+    }
+  ],
+  "sections": [
+    {
+      "id": 1,
+      "documentId": 2,
+      "type": "custom",
+      "label": "Imported Content",
+      "order": 1
+    },
+    {
+      "id": 2,
+      "documentId": 1,
+      "type": "experience",
+      "label": "Work Experience",
+      "order": 1
+    }
+  ],
+  "sectionItems": [
+    {
+      "id": 1,
+      "sectionId": 1,
+      "order": 1,
+      "fields": {
+        "paragraph": "Sample content"
+      }
+    },
+    {
+      "id": 2,
+      "sectionId": 2,
+      "order": 1,
+      "fields": {
+        "title": "Backend Development Intern",
+        "organization": "Stokes, Beer and Keeling",
+        "startDate": "2025-01",
+        "endDate": "2025-06",
+        "bullets": [
+          "Wrote unit tests for the API layer",
+          "Fixed bugs in the payment module"
+        ]
+      }
+    }
+  ],
+  "versions": [
+    {
+      "id": 1,
+      "documentId": 1,
+      "label": "First Draft",
+      "snapshot": {
+        "id": 1,
+        "userId": 1,
+        "title": "Frontend Developer Resume - Updated",
+        "type": "resume",
+        "templateId": 1,
+        "createdAt": "2026-07-18T13:23:37.166Z",
+        "updatedAt": "2026-07-18T13:29:58.868Z",
+        "sections": [
+          {
+            "id": 2,
+            "documentId": 1,
+            "type": "experience",
+            "label": "Work Experience",
+            "order": 1,
+            "items": [
+              {
+                "id": 2,
+                "sectionId": 2,
+                "order": 1,
+                "fields": {
+                  "title": "Backend Development Intern",
+                  "organization": "Stokes, Beer and Keeling",
+                  "startDate": "2025-01",
+                  "endDate": "2025-06",
+                  "bullets": [
+                    "Wrote unit tests for the API layer",
+                    "Fixed bugs in the payment module"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "createdAt": "2026-07-18T13:52:03.132Z"
+    },
+    {
+      "id": 2,
+      "documentId": 1,
+      "label": "Version 2",
+      "snapshot": {
+        "id": 1,
+        "userId": 1,
+        "title": "Frontend Developer Resume - Updated",
+        "type": "resume",
+        "templateId": 1,
+        "createdAt": "2026-07-18T13:23:37.166Z",
+        "updatedAt": "2026-07-18T13:29:58.868Z",
+        "sections": [
+          {
+            "id": 2,
+            "documentId": 1,
+            "type": "experience",
+            "label": "Work Experience",
+            "order": 1,
+            "items": [
+              {
+                "id": 2,
+                "sectionId": 2,
+                "order": 1,
+                "fields": {
+                  "title": "Backend Development Intern",
+                  "organization": "Stokes, Beer and Keeling",
+                  "startDate": "2025-01",
+                  "endDate": "2025-06",
+                  "bullets": [
+                    "Wrote unit tests for the API layer",
+                    "Fixed bugs in the payment module"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "createdAt": "2026-07-18T13:52:19.529Z"
+    }
+  ],
+  "templates": [
+    {
+      "id": 1,
+      "name": "Modern Blue",
+      "description": "Clean two column resume layout",
+      "config": {
+        "primaryColor": "#2563eb",
+        "columns": 2
+      }
+    }
+  ],
+  "applications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "documentId": null,
+      "company": "Infosys",
+      "role": "SDE Intern",
+      "status": "interviewing",
+      "appliedAt": "2026-07-18T14:00:13.511Z",
+      "notes": "Referred by a senior"
+    }
+  ]
+}
